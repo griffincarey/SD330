@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Fridge App - Carey </title>  
+  <meta charset="UTF-8">
+  <style>
+      
+  </style>
+</head>
+<body onload="doStartClock()">
+    <h2>Fridge App</h2>
+    <p></p>
+    <button id="onOff" onclick="turnOnOff()">Click to turn on</button>
+    <p id = "timeDisplay" style="display:none"></p>
+    <p id="help" style="display:none">Enter the name of the item you would like to add or the number of them item you would like to remove</p>
+    <input id="userInput" type="text" style="display:none">
+    <button onclick="addItem()" id="addButton" style="display:none">add</button>
+    <button onclick="removeItem()" id="removeButton" style="display:none">remove</button>
+    <p id = "fridgeHeader" style="display:none">Items in Fridge:</p>
+    <ol id="fridgeContents" style="display:none">
+        
+    </ol>
+    <img id="fridge" src="https://aptokash.github.io/SD330/06-fridge.jpg" style="display: none">
+    <img id="tv" src="https://aptokash.github.io/SD330/06-tv.jpg" style="display: none">
+    <img id="search" src="https://aptokash.github.io/SD330/06-web.jpg" style="display: none">
+    
+   
+    <hr>
+    <small>&copy; G. Carey - 3/10/2023</small>
+  </footer>
+</body>
+<script>
+    var on = false;
+    var items = [];
+    function doStartClock(){
+        setInterval(doClockTick, 1000);
+    }
+
+    function doClockTick(){
+        var currentDate = new Date();
+        var hours = currentDate.getHours();
+        var mins = currentDate.getMinutes();
+        var secs = currentDate.getSeconds();
+        var timeOutput = hours+":"+mins+":"+secs;
+
+        var output = document.getElementById("timeDisplay");
+        output.innerHTML = timeOutput;
+    }
+    function addItem(){
+        item = document.getElementById("userInput").value;
+        items.push(item);
+        var theList = "";
+        console.log(item)
+        
+        for(var i = 0; i < items.length; i++){
+            theList += "<li>" + items[i] + "</li> "
+        }
+        console.log(theList);
+        document.getElementById("fridgeContents").innerHTML =theList;
+    }
+    function removeItem(num){
+        items.splice(num, 1);
+        var theList = "";
+        for(var i = 0; i < items.length; i++){
+            theList += "<li>" + items[i] + "</li>"
+        }
+        document.getElementById("fridgeContents").innerHTML =theList;
+    }
+    function turnOnOff(){
+        if(on){
+            on = false;
+            document.getElementById("fridge").style.display = "none";
+            document.getElementById("tv").style.display = "none";
+            document.getElementById("search").style.display = "none";
+            document.getElementById("timeDisplay").style.display = "none";
+            document.getElementById("fridgeHeader").style.display = "none";
+            document.getElementById("fridgeContents").style.display = "none";
+            document.getElementById("userInput").style.display = "none";
+            document.getElementById("addButton").style.display = "none";
+            document.getElementById("removeButton").style.display = "none";
+            document.getElementById("help").style.display = "none";
+            document.getElementById("onOff").innerHTML = "Click to turn on";
+        }else{
+            on = true;
+            document.getElementById("fridge").style.display = "block";
+            document.getElementById("tv").style.display = "block";
+            document.getElementById("search").style.display = "block";
+            document.getElementById("timeDisplay").style.display = "block";
+            document.getElementById("fridgeHeader").style.display = "block";
+            document.getElementById("fridgeContents").style.display = "block";
+            document.getElementById("userInput").style.display = "block";
+            document.getElementById("addButton").style.display = "block";
+            document.getElementById("removeButton").style.display = "block";
+            document.getElementById("help").style.display = "block";
+            document.getElementById("onOff").innerHTML = "Click to turn off";
+        }
+    }
+</script>
+</html>
