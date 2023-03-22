@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Griffin Carey's Design Principals </title>  
+  <meta charset="UTF-8">
+</head>
+<body>
+    <h1>A06-Carey</h1>
+    
+    <h2>Key Ideas</h2>
+    <ul>
+        <li>Accessability</li>
+        <li>Consistancy</li>
+        <li>Affordances</li>
+        <li>Feedback</li>
+        <li>Constraints</li>
+        <li>Visability</li>
+    </ul>
+
+    <h2>Design Approaches</h2>
+    <ul>
+        <li>Double Diamond: discover, define, develope & deliver</li>
+        <li>User centered design focues on user needs</li>
+        <li>Activity focuses on certain function</li>
+        <li>Genius is when the designer takes control</li>
+        <li>Human Centered design helps solve probelems by using real people</li>
+        <li>Getting user input early in the design</li>
+    </ul>
+
+    <h2>Interactivity Principals</h2>
+    <ul>
+        <li>Feedback should be given to the user quickly</li>
+        <li>Every button and click should be meaningful</li>
+        <li>3 clicks to reach anyware in the site</li>
+        <li>Empathy for user errors</li>
+    </ul>
+
+    <h2>Cognitive Principals</h2>
+    <ul>
+        <li>Keep users attention with visuals</li>
+        <li>The perception is based on how information is presented and what order</li>
+        <li>Make sure to have memorable features and design</li>
+        <li>Make it clear what should be pressed to get to certain functions of the site</li>
+    </ul>
+
+    <h2>Compleity</h2>
+    <ul>
+        <li>Should be simple to use</li>
+        <li>There will always be some level of compleity no matter how much you simplify</li>
+        <li>The user shouldn't have to think</li>
+        <li>Users shouldn't need a tutorial</li>
+        <li>Learn by themselves though trial</li>
+    </ul>
+
+    <h2>Gender and Language Principals</h2>
+    <ul>
+        <li>Different colors apeal to different genders</li>
+        <li>Genders want different labeling and look for differnt features</li>
+        <li>Certain languages read different directions</li>
+    </ul>
+
+    <h2>Mobile/Other Interfaces Principals</h2>
+    <ul>
+        <li>Have different layouts for smaller or larger screens</li>
+        <li>Have a setup for touch screen users</li>
+        <li>Include the option to change certain features to fit their needs</li>
+    </ul>
+
+    <hr>
+    <small>&copy; G. Carey - 3/21/23</small>
+  </footer>
+</body>
+<script>
+    
+</script>
+</html>
