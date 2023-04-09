@@ -4,26 +4,81 @@
   <title> Fridge App - Carey </title>  
   <meta charset="UTF-8">
   <style>
-      
+      #screen{
+          background-color: lightblue;
+          color: black;
+          padding: 10px;
+          width: 1200px;
+          height: 600px;
+      }
+      .additions{
+        width: 29.2%; 
+        height:100px; 
+        background-color: 
+        blue; border: 
+        5px solid black;
+        padding: 20px;
+        vertical-align: middle;
+        float: left;
+      }
+      #container{
+          border: 3px solid grey;
+          height: 150px;
+      }
+      img{
+          height: 100%;
+          width: 100%;
+          display: none;
+      }
+      button{
+          width: 19%;
+          height: 10%;
+      }
   </style>
 </head>
 <body onload="doStartClock()">
     <h2>Fridge App</h2>
     <p></p>
+
     <button id="onOff" onclick="turnOnOff()">Click to turn on</button>
-    <p id = "timeDisplay" style="display:none"></p>
-    <p id="help" style="display:none">Enter the name of the item you would like to add or the number of them item you would like to remove</p>
-    <input id="userInput" type="text" style="display:none">
-    <button onclick="addItem()" id="addButton" style="display:none">add</button>
-    <button onclick="removeItem()" id="removeButton" style="display:none">remove</button>
-    <p id = "fridgeHeader" style="display:none">Items in Fridge:</p>
-    <ol id="fridgeContents" style="display:none">
+    <div style="display:none" id="screen">
+        <button onclick="changeClockMode()">Change time setting</button>
+        <button onClick="changeTemp()">Change the temperature setting</button>
+        <button onClick="increaseTemp()">Increase the fridge temperature</button>
+        <button onClick="decreaseTemp()">Decrease the fridge temperature</button>
+        <button onCLick="startTimer()">Click to start timer</button>
+        <p id = "timeDisplay" ></p>
+
+        <button id="fridgeButton" onclick="turnOnFridge()">Turn on Fridge Display</button>
+        <button id="tvButton" onclick="turnOnTV()">Turn on TV</button>
+        <button id="browswerButton" onclick="turnOnBrowswer()">Turn on Browswer</button>
+
+        <p id="help" >Enter the name of the item you would like to add or the number of them item you would like to remove</p>
+        <input id="userInput" type="text" >
+        <button onclick="addItem()" id="addButton" >add</button>
+        <button onclick="removeItem()" id="removeButton" >remove</button>
+        <p id = "fridgeHeader" >Items in Fridge:</p>
+        <ol id="fridgeContents" >
+            <li>Apple</li>
+            <li>Pizza</li>
+            <li>Pasta</li>
+            <li>Pear</li>
+            <li>Milk</li>
+        </ol>
+        <div id="container">
+            <div class="additions" >
+                <img id="fridge" src="https://griffincarey.github.io/SD330/fridgephoto.jfif" >
+            </div>
+            <div class="additions" >
+                <img id="tv" src="https://griffincarey.github.io/SD330/TV_Screen.jfif" >
+            </div>
+            <div class="additions" >
+                <img id="search" src="https://griffincarey.github.io/SD330/searchbar.jfif" >
+            </div>
+        </div>
+
         
-    </ol>
-    <img id="fridge" src="https://aptokash.github.io/SD330/06-fridge.jpg" style="display: none">
-    <img id="tv" src="https://aptokash.github.io/SD330/06-tv.jpg" style="display: none">
-    <img id="search" src="https://aptokash.github.io/SD330/06-web.jpg" style="display: none">
-    
+    </div>
    
     <hr>
     <small>&copy; G. Carey - 3/10/2023</small>
@@ -31,9 +86,24 @@
 </body>
 <script>
     var on = false;
-    var items = [];
+    var tvOn = false;
+    var browserOn = false;
+    var fridgeOn = false;
+    var timeFormat = true;
+    var inCelcius = true;
+    var temp = 5;
+    var timeLeft = 0;
+    var items = ["Apple", "Pizza", "Pasta", "Pear", "Milk"];
     function doStartClock(){
         setInterval(doClockTick, 1000);
+    }
+
+    function changeClockMode(){
+        if(timeFormat){
+            timeFormat = false;
+        }else{
+            timeFormat = true;
+        }
     }
 
     function doClockTick(){
@@ -41,11 +111,61 @@
         var hours = currentDate.getHours();
         var mins = currentDate.getMinutes();
         var secs = currentDate.getSeconds();
-        var timeOutput = hours+":"+mins+":"+secs;
-
-        var output = document.getElementById("timeDisplay");
-        output.innerHTML = timeOutput;
+        var timeOutput;
+        if(timeFormat){
+            timeOutput = hours+":"+mins+":"+secs + " (24 hour format); ";
+        }else{
+            var ampm = "am";
+            if(hours / 12 > 1){
+                ampm = "pm";
+            }
+            hours = hours %12;
+            if(hours == 0){
+                hours = 12;
+            }
+            timeOutput = hours+":"+mins+":"+secs + ampm +" (12 hour format); ";
+        }
+        
+        
+        var weatherOutput = "Sunny 67 degrees; "
+        
+        var tempOutput;
+        if(inCelcius){
+            tempOutput = temp + " degrees celcius; ";
+        }else{
+            tempOutput = temp + " degrees fahrenheit; ";
+        }
+        if(timeLeft > 0){
+            timeLeft--;
+        }
+        var timeLeftOutput = timeLeft + " seconds remaining; ";
+        
+        var totalOutput = timeOutput + weatherOutput + tempOutput + timeLeftOutput;
+        document.getElementById("timeDisplay").innerHTML = totalOutput;
     }
+
+    function startTimer(){
+        timeLeft = 60;
+    }
+
+    function changeTemp(){
+        if(inCelcius){
+            temp = temp * 9 / 5 + 32;
+            inCelcius = false;
+        }else{
+            temp = temp - 32;
+            temp = temp * 5 / 9
+            inCelcius = true;
+        }
+    }
+
+    function increaseTemp(){
+        temp++;
+    }
+    function decreaseTemp(){
+        temp--;
+    }
+
     function addItem(){
         item = document.getElementById("userInput").value;
         items.push(item);
@@ -66,32 +186,51 @@
         }
         document.getElementById("fridgeContents").innerHTML =theList;
     }
+
+    function turnOnTV(){
+        if(tvOn){
+            tvOn = false;
+            document.getElementById("tv").style.display = "none";
+            document.getElementById("tvButton").innerHTML = "Turn on TV";
+        }else{
+            tvOn = true;
+            document.getElementById("tv").style.display = "block";
+            document.getElementById("tvButton").innerHTML = "Turn off TV";
+        }
+    }
+
+    function turnOnBrowswer(){
+        if(browserOn){
+            browserOn = false;
+            document.getElementById("search").style.display = "none";
+            document.getElementById("browswerButton").innerHTML = "Turn on Browswer";
+        }else{
+            browserOn = true;
+            document.getElementById("search").style.display = "block";
+            document.getElementById("browswerButton").innerHTML = "Turn off Browswer";
+        }
+    }
+
+    function turnOnFridge(){
+        if(fridgeOn){
+            fridgeOn = false;
+            document.getElementById("fridge").style.display = "none";
+            document.getElementById("fridgeButton").innerHTML = "Turn on Fridge";
+        }else{
+            fridgeOn = true;
+            document.getElementById("fridge").style.display = "block";
+            document.getElementById("fridgeButton").innerHTML = "Turn off Fridge";
+        }
+    }
+
     function turnOnOff(){
         if(on){
             on = false;
-            document.getElementById("fridge").style.display = "none";
-            document.getElementById("tv").style.display = "none";
-            document.getElementById("search").style.display = "none";
-            document.getElementById("timeDisplay").style.display = "none";
-            document.getElementById("fridgeHeader").style.display = "none";
-            document.getElementById("fridgeContents").style.display = "none";
-            document.getElementById("userInput").style.display = "none";
-            document.getElementById("addButton").style.display = "none";
-            document.getElementById("removeButton").style.display = "none";
-            document.getElementById("help").style.display = "none";
+            document.getElementById("screen").style.display = "none";
             document.getElementById("onOff").innerHTML = "Click to turn on";
         }else{
             on = true;
-            document.getElementById("fridge").style.display = "block";
-            document.getElementById("tv").style.display = "block";
-            document.getElementById("search").style.display = "block";
-            document.getElementById("timeDisplay").style.display = "block";
-            document.getElementById("fridgeHeader").style.display = "block";
-            document.getElementById("fridgeContents").style.display = "block";
-            document.getElementById("userInput").style.display = "block";
-            document.getElementById("addButton").style.display = "block";
-            document.getElementById("removeButton").style.display = "block";
-            document.getElementById("help").style.display = "block";
+            document.getElementById("screen").style.display = "block";
             document.getElementById("onOff").innerHTML = "Click to turn off";
         }
     }
