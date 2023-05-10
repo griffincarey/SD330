@@ -1,0 +1,58 @@
+.navBar{
+    width: 24%;
+    height: 75px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: blue;
+    float: left;
+    border: 5px black solid;
+}
+button{
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: maroon;
+    font-size: large;
+}
+#top{
+    width: 100%;
+    height: 200px;
+    background-color: rgb(177, 177, 177);
+    margin-left: 0px;
+}
+#heading{
+    width: 100%;
+    height: 100px;
+}
+body{
+    background-color: rgb(66, 66, 66);
+}
+
+
+#books{
+    width: 100%;
+    height: 400px
+}
+#fox{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+#cart{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+#foxbox{
+    float: left;
+    margin-left: 25%;
+    margin-top: 20px
+}
+#cartbox{
+    float: left;
+    margin-left: 35%;
+    margin-top: 20px
+}
+#welcome{
+    float: left;
+}
